@@ -323,7 +323,7 @@
 
 2. Подключаем локальный репозиторий к удаленному
 
->git remote add origin git@github.com:shiryaevartyom/gb.git
+>git remote add origin git@github.com:username/reponame.git
 
 3. Push в удаленный репозиторий
 
