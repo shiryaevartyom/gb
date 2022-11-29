@@ -19,6 +19,8 @@
 
 Более подробно [здесь](https://gist.github.com/Jekins/2bf2d0638163f1294637 "Переходим и наслаждаемся") 
 
+Статья на Habr [здесь](https://habr.com/ru/post/536448/ "Переходим и наслаждаемся") 
+
 
 ##  1. Заголовки
 
@@ -167,3 +169,21 @@ Markdown поддерживает упрощённый порядок автом
 
     <http://example.com/>
 
+### 9. Collapse
+
+<details>
+  <summary>Click me</summary>
+  
+  ### Heading
+  1. Foo
+  2. Bar
+     * Baz
+     * Qux
+
+  ### Some Code
+  ```js
+  function logSomething(something) {
+    console.log('Something', something);
+  }
+  ```
+</details>
