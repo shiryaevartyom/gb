@@ -256,6 +256,14 @@
 
     git branch
 
+### Визуальное отображение веток
+#
+
+> git log --graph --pretty=oneline --abbrev-commit
+
+> git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches
+
+
 ### Переключаться между ветками:
 #
 
