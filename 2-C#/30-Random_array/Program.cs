@@ -1,37 +1,98 @@
-﻿// Задача 30: Напишите программу, которая выводит массив из 8 элементов, заполненный нулями и единицами в случайном порядке. [1,0,1,1,0,1,0,0] 
-// обернуть в функцию булеввого типа, выводим массив через запятую
-// Написать функцию которая определяет больше ли 1 чем 0 в массиве
+﻿// Задача 30: - HARD необязательная Напишите программу, которая на вход получает размерность массива.
+// Далее заполняет его случайными уникальными числами и выводит на экран.
+// Далее производим сортировку массива от большего к меньшему и выводим на экран.
+// Далее придумываем алгоритм перемешивания списка на основе случайности,
+// применяем этот алгоритм и выводим на экран результат.
+// Встроенные методы работы со списками использовать нельзя.
 
-Console.WriteLine("Какой длинны массив будем генерировать:");
+Console.WriteLine("Какой длинны Уникальный массив будем генерировать:");
 int n = Convert.ToInt32(Console.ReadLine());
+int depth = 0;
 
-int[] array = CreateRandomBoolArray (n);
+//Проверка - глубина больше ширины - для уникальности массива.
+bool checkDepth = false;
+while (checkDepth != true)
+{
+    Console.WriteLine($"Какой глубины будет Уникальный массив (используй число больше чем длина {n}):");
+    depth = Convert.ToInt32(Console.ReadLine());
+    if (depth > n)
+        checkDepth = true;
+    else Console.WriteLine("Глубина меньше размера, уникальный массив не создать!");
+}
 
+int[] array = CreateRandomUniqueArray(n, depth);
+
+Console.WriteLine($"Сгенерированный уникальный массив, длинна {n} / диапазон генерации {depth}:");
 PrintArray(array);
 
-if (CheckOne(array)) Console.WriteLine("В Массиве единиц больше чем нулей");
-else Console.WriteLine("В Массиве нулей больше чем единиц");
+SortArrayMaxToMin(array);
 
+Console.WriteLine($"Отсортированный массив, от большего к меньшему:");
+PrintArray(array);
 
-void PrintArray (int[] a) //#### Функция печатаем массив  ########################################################
+MixingRandomArray(array);
+
+Console.WriteLine($"Перемешанный массив:");
+PrintArray(array);
+
+void PrintArray(int[] array) //#### Функция печатает массив  ###################################################################################################
 {
-    for (int i=0; i<a.Length; i++) Console.Write($"{a[i]}, ");
-    Console.WriteLine($"{a[^1]}");
+    foreach (int el in array) // этот цикл только для просмотра и тут нет индексов
+        Console.Write($"{el} ");
+    Console.WriteLine();
+
 }
 
-
-bool CheckOne(int[] a)  //#### Функция проверяем кол-во единиц  ################################################
+int[] CreateRandomUniqueArray(int size, int depth) //#### Функция генерируем Уникальный Массив указанной длины size со случайными цифрами от 0 до depth ################
 {
-    int sum = 0;
-    for (int i=0; i < a.Length; i++) sum = sum + a[i];
-    
-    if (sum > a.Length/2) return true;
-    else return false;
+    int[] uniqueArray = new int[size];
+
+    for (int i = 0; i < size; i++)
+    {
+        bool checkUnique = false;
+        int countUnique = 0;
+        while (checkUnique != true)
+        {
+            uniqueArray[i] = new Random().Next(1, depth);
+            for (int j = 0; j < i; j++)
+            {
+                if (uniqueArray[i] != uniqueArray[j]) countUnique++;
+            }
+
+            if (countUnique == i) checkUnique = true;
+        }
+    }
+    return uniqueArray;
 }
 
-int[] CreateRandomBoolArray (int count) //#### Функция генерируем Массив указанной длины с 1 и 0 ################
+int[] SortArrayMaxToMin(int[] array) //#### Функция сортирует массив от Максимально к Минимальному ###############################################################
 {
-    int[] array = new int[count];
-    for (int i=0; i<count; i++) array[i] = new Random().Next(0, 2);
-    return array;    
+
+    for (int i = 0; i < array.Length - 1; i++)
+    {
+        int minPosition = i;
+
+        for (int j = i + 1 ; j < array.Length; j++)
+        {
+            if(array[j] > array[minPosition]) minPosition = j;
+        }
+
+        int temporary = array[i];
+        array[i] = array[minPosition];
+        array[minPosition] = temporary;
+    }    
+    return array;
+}
+
+int[] MixingRandomArray(int[] array) //#### Функция Перемешиваем рандомно массив ###############################################################
+{
+
+    for (int i = 0; i < array.Length; i++)
+    {
+        int Position = new Random().Next(0, array.Length);;
+        int temporary = array[i];
+        array[i] = array[Position];
+        array[Position] = temporary;
+    }    
+    return array;
 }
