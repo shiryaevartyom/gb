@@ -1,16 +1,16 @@
-﻿// Задача 38: Задайте массив случайных вещественных чисел.
+// Задача 38: Задайте массив случайных вещественных чисел.
 // Найдите разницу между максимальным и минимальным элементов массива.
 
-Console.WriteLine("Какой длинны массив будем генерировать:");
+Console.WriteLine("Какой длинны массив из вещественных чисел будем генерировать?:");
 int n = Convert.ToInt32(Console.ReadLine());
 
-Console.WriteLine("Генерируем массив....");
-double[] array = CreateRandomArray(n);
+Console.WriteLine("Генерируем массив из вещественных чисел....");
+double[] array = CreateRandomDoubleArray(n);
 
-Console.WriteLine("Сгенерированный массив:");
+Console.WriteLine("Сгенерированный массив из вещественных чисел:");
 PrintArray(array);
 
-Console.WriteLine($"Разность между максимальным {returnValue(array, "max")} и минимальным {returnValue(array,"min")}: {returnValue(array,"max")-returnValue(array,"min")}");
+Console.WriteLine($"Разность между максимальным {Math.Round((returnValue(array, "max")),3)} и минимальным {Math.Round((returnValue(array,"min")),3)}: {Math.Round((returnValue(array,"max")-returnValue(array,"min")),3)}");
 
 
 // Печатает массив  #################################################################################
@@ -18,14 +18,14 @@ Console.WriteLine($"Разность между максимальным {return
 void PrintArray(double[] array) 
 {
     foreach (double el in array) // этот цикл только для просмотра и тут нет индексов
-        Console.Write($"{el} ");
+        Console.Write($"{Math.Round(el,3)} ");
     Console.WriteLine();
 
 }
 
 // Генерируем Массив указанной длины size со случайными вещественными числами ########################
 
-double[] CreateRandomArray(int size) 
+double[] CreateRandomDoubleArray(int size) 
 {
     double[] array = new double[size];
 
